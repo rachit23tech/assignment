@@ -36,36 +36,35 @@
 </form>
 
     <div v-if="loading">Loading...</div>
+<div v-else class="station-list">
+  <div v-for="station in filteredStations" :key="station._id" class="station-card">
+    <div v-if="editingStationId === station._id">
+      <input v-model="editStation.name" placeholder="Name" />
+      <input v-model="editStation.lat" step="any" type="number" placeholder="Latitude" />
+      <input v-model="editStation.lng" step="any" type="number" placeholder="Longitude" />
+      <select v-model="editStation.status">
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+      </select>
+      <input v-model="editStation.powerOutput" placeholder="Power Output" />
+      <select v-model="editStation.connectorType">
+        <option value="Type1">Type 1</option>
+        <option value="Type2">Type 2</option>
+      </select>
+      <button @click="handleUpdateStation">Save</button>
+      <button @click="editingStationId = null">Cancel</button>
+    </div>
     <div v-else>
-    <div v-for="station in filteredStations" :key="station._id">
-  <div v-if="editingStationId === station._id">
-    
-    <input v-model="editStation.name" placeholder="Name" />
-    <input v-model="editStation.lat" step="any" type="number" placeholder="Latitude" />
-    <input v-model="editStation.lng" step="any" type="number" laceholder="Longitude" />
-    <select v-model="editStation.status">
-      <option value="Active">Active</option>
-      <option value="Inactive">Inactive</option>
-    </select>
-    <input v-model="editStation.powerOutput" placeholder="Power Output" />
-    <select v-model="editStation.connectorType">
-      <option value="Type1">Type 1</option>
-      <option value="Type2">Type 2</option>
-    </select>
-    <button @click="handleUpdateStation">Save</button>
-    <button @click="editingStationId = null">Cancel</button>
-  </div>
-  <div v-else>
-    <h3>{{ station.name }}</h3>
-    <p>Status: {{ station.status }}</p>
-    <p>Power: {{ station.powerOutput }} kW</p>
-    <p>Connector: {{ station.connectorType }}</p>
-    <button @click="startEdit(station)">Edit</button>
-    <button @click="handleDeleteStation(station._id)">Delete</button>
-  </div>
-  </div>
+      <h3>{{ station.name }}</h3>
+      <p>Status: {{ station.status }}</p>
+      <p>Power: {{ station.powerOutput }} kW</p>
+      <p>Connector: {{ station.connectorType }}</p>
+      <button @click="startEdit(station)">Edit</button>
+      <button @click="handleDeleteStation(station._id)">Delete</button>
     </div>
-    </div>
+  </div>
+</div>
+</div>
 </template>
 
 <script setup>
@@ -193,3 +192,18 @@ onMounted(async () => {
   }
 })
 </script>
+<style scoped>
+.station-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.station-card {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 16px;
+  width: 250px;
+  background-color: white;
+}
+</style>
