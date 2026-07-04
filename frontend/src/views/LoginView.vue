@@ -8,6 +8,7 @@
 </form>
 <p v-if="errorMessage">{{ errorMessage }}</p>
 </div>
+<p>Don't have an account? <router-link to="/register">Register here</router-link></p>
 </template>
 <script setup>
 import {ref} from 'vue'
