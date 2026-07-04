@@ -1,39 +1,37 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue'
+import RegisterView from '../views/RegisterView.vue'
 import ChargerListView from '../views/ChargerListView.vue'
 import MapView from '../views/MapView.vue'
-import RegisterView from '../views/RegisterView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: '/login',
-      name: 'login',
-      component: LoginView,
+    { path: '/', 
+      redirect: '/login' 
     },
-    {
-      path: '/',
-      name: 'home',
-      component: ChargerListView,
+    { path: '/login', 
+      name: 'login', 
+      component: LoginView 
     },
-    {
-      path: '/map',
-      name: 'map',
-      component: MapView,
+    { path: '/register', 
+      name: 'register', 
+      component: RegisterView 
     },
-    {
-      path: '/register',
-      name: 'register',
-      component: RegisterView,
-    }
-
+    { path: '/chargers', 
+      name: 'chargers', 
+      component: ChargerListView 
+    },
+    { path: '/map', 
+      name: 'map', 
+      component: MapView 
+    },
   ],
 })
 
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token')
-  const protectedPaths = ['/', '/map']
+  const protectedPaths = ['/chargers', '/map']
 
   if (protectedPaths.includes(to.path) && !token) {
     next('/login')

@@ -2,7 +2,7 @@
   <nav>
     <div> Electric Vehicle Charging Pointer </div>
     <div>
-      <router-link to="/">Chargers</router-link>
+      <router-link to="/chargers">Chargers</router-link>
       <router-link to="/map">Map</router-link>
       <button v-if="isLoggedIn" @click="handleLogout">Logout</button>
       <router-link v-else to="/login">Login</router-link>

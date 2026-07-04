@@ -27,7 +27,7 @@ email: email.value,
 password: password.value
 })
 localStorage.setItem('token', response.data.token)
-router.push('/')
+router.push('/chargers')
 } catch (error) {
 errorMessage.value = 'Login failed. Please check your credentials.'
 }
