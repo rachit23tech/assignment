@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'https://evoltsoft-assignment-iyvg.onrender.com/api',
   });
 apiClient.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
